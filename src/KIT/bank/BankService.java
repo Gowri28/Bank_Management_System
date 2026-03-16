@@ -71,6 +71,10 @@ public class BankService
     }
     public void transfer(long fromAccno, long toAccno, double amount) 
     {
+        if (fromAccno == toAccno) {
+        System.out.println("Cannot transfer to the same account.");
+        return;
+    }
         Account fromAccount = null;
         Account toAccount = null;
         for (Account account : accounts) 
