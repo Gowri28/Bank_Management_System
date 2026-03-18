@@ -36,6 +36,11 @@ public class BankService
 
     public void deposit(long accno, double amount)
     {
+        if(amount <= 0) {
+        System.out.println("Invalid amount.");
+        return;
+    }
+
         for (Account account : accounts)
         {
             if (account.getAccno() == accno)
@@ -52,6 +57,11 @@ public class BankService
     }
     public void withdraw(long accno, double amount)
     {
+        if(amount <= 0) {
+        System.out.println("Invalid amount.");
+        return;
+    }
+
         for (Account account : accounts) 
         {
             if (account.getAccno() == accno) 
@@ -77,6 +87,11 @@ public class BankService
     }
     public void transfer(long fromAccno, long toAccno, double amount) 
     {
+        if(amount <= 0) {
+        System.out.println("Invalid amount.");
+        return;
+    }
+
         if (fromAccno == toAccno) {
         System.out.println("Cannot transfer to the same account.");
         return;

@@ -48,7 +48,7 @@ public class Transaction {
 	}
 	@Override
 	public String toString() {
-		return "Transection [tid=" + tid + ", accno=" + accno + ", amount=" + amount + ", type=" + type + ", date="
+		return "Transaction [tid=" + tid + ", accno=" + accno + ", amount=" + amount + ", type=" + type + ", date="
 				+ date + "]";
 	}
 	
