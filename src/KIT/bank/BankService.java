@@ -6,15 +6,21 @@ import java.util.List;
 public class BankService 
 {
     private List<Account> accounts = new ArrayList<>();
-    private List<Transection> transections = new ArrayList<>();
+    private List<Transaction> transactions = new ArrayList<>();
     private int transactionCounter = 1; 
-    public  void createAccount(long accno, String accholder, double bal)
-    {
-        Account account = new Account(accno, accholder, bal);
-        accounts.add(account);
-        System.out.println("Account created: " + account);
+    public void createAccount(long accno, String accholder, double bal)
+{
+    for(Account a : accounts) {
+        if(a.getAccno() == accno) {
+            System.out.println("Account already exists.");
+            return;
+        }
     }
 
+    Account account = new Account(accno, accholder, bal);
+    accounts.add(account);
+    System.out.println("Account created: " + account);
+}
     public void getAccount(long accno)
     {
         for (Account account : accounts)
@@ -36,7 +42,7 @@ public class BankService
             {
                 account.setBal(account.getBal() + amount);
                 System.out.println("Deposited " + amount + " into account " + accno);
-                transections.add(new Transection(
+                transactions.add(new Transaction(
                     generateTransactionId(), accno, amount, "Deposit", LocalDateTime.now()
                 ));
                 return;
@@ -53,9 +59,9 @@ public class BankService
                 if (account.getBal() >= amount) 
                 {
                     account.setBal(account.getBal() - amount);
-                    System.out.println("Withdraw" + amount + " from account " + accno);
-                    System.out.println("New balance:" + account.getBal());
-                    transections.add(new Transection(
+                    System.out.println("Withdraw " + amount + " from account " + accno);
+                    System.out.println("New balance: " + account.getBal());
+                    transactions.add(new Transaction(
                         generateTransactionId(), accno, amount, "Withdraw", LocalDateTime.now()
                     ));
                     return;
@@ -95,9 +101,9 @@ public class BankService
                 fromAccount.setBal(fromAccount.getBal() - amount);
                 toAccount.setBal(toAccount.getBal() + amount);
                 System.out.println("Transferred " + amount + " from account " + fromAccno + " to " + toAccno);
-                transections.add(new Transection(
+                transactions.add(new Transaction(
                     generateTransactionId(), fromAccno, amount, "Transfer Out", LocalDateTime.now() ));
-                transections.add(new Transection(
+                transactions.add(new Transaction(
                     generateTransactionId(), toAccno, amount, "Transfer In", LocalDateTime.now()));
             }
             else
@@ -116,13 +122,13 @@ public class BankService
     }
     public void viewTransactionHistory()
     {
-        if (transections.isEmpty())
+        if (transactions.isEmpty())
         {
             System.out.println("No transactions found.");
         } 
         else 
         {
-            for (Transection t : transections)
+            for (Transaction t : transactions)
             {
                 System.out.println(t);
             }

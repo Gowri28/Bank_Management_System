@@ -1,7 +1,7 @@
 package KIT.bank;
 import java.time.LocalDateTime;
 
-public class Transection {
+public class Transaction {
 	private int tid;
 	private long accno;
 	private double amount;
@@ -38,7 +38,7 @@ public class Transection {
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-	public Transection(int tid, long accno, double amount, String type, LocalDateTime date) {
+	public Transaction(int tid, long accno, double amount, String type, LocalDateTime date) {
 		super();
 		this.tid = tid;
 		this.accno = accno;

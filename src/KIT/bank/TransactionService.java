@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 
 public class TransactionService {
-	 private List<Transection> transactions = new ArrayList<>();
+	 private List<Transaction> transactions = new ArrayList<>();
 	    private int transactionCounter = 1;
 	    public void recordTransaction(long accno, String type, double amount) {
-	        Transection transaction = new Transection(
+	        Transaction transaction = new Transaction(
 	            generateTransactionId(),
 	            accno,
 	            amount,
@@ -20,7 +20,7 @@ public class TransactionService {
 	        transactions.add(transaction);
 	    }
 
-	    public List<Transection> getTransactionsForAccount(long accno) {
+	    public List<Transaction> getTransactionsForAccount(long accno) {
 	        return transactions.stream()
 	                .filter(txn -> txn.getAccno() == accno)
 	                .collect(Collectors.toList());
